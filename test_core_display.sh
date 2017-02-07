@@ -77,3 +77,7 @@ tb_test -i lb_short_result --log $?
 
 # delete test log file
 rm -f "$t_logfile"
+
+
+# avoid skipping tests if last failed
+return

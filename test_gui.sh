@@ -130,3 +130,7 @@ EOF
 EOF
 	tb_test -n "lbg_choose_file = $(lb_realpath $0)" -r "$(lb_realpath $0)" echo "$(lb_realpath $lbg_choose_file)"
 done
+
+
+# avoid skipping tests if last failed
+return

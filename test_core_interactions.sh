@@ -73,3 +73,7 @@ EOF
 tb_test -i -c 3 lb_choose_option choose a bad option << EOF
 9999
 EOF
+
+
+# avoid skipping tests if last failed
+return

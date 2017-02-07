@@ -21,3 +21,6 @@ tb_test lb_test_arguments -le 2 Hello world
 tb_test lb_test_arguments -lt 3 Hello world
 tb_test lb_test_arguments -ge 2 Hello world
 tb_test lb_test_arguments -gt 1 Hello world
+
+# avoid skipping tests if last failed
+return

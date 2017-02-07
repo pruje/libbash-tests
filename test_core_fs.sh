@@ -32,3 +32,7 @@ if [ "$(lb_detect_os)" == "macOS" ] ; then
 else
 	tb_test lb_df_uuid "$0"
 fi
+
+
+# avoid skipping tests if last failed
+return
