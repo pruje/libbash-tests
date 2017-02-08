@@ -40,4 +40,4 @@ tb_test lb_realpath "$0"
 
 
 # avoid skipping tests if last failed
-return
+return 0

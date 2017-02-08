@@ -31,4 +31,4 @@ tb_test lb_is_comment -s "//" "//Comment"
 
 
 # avoid skipping tests if last failed
-return
+return 0

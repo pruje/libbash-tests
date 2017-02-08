@@ -35,4 +35,4 @@ fi
 
 
 # avoid skipping tests if last failed
-return
+return 0
