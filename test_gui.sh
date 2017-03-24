@@ -5,7 +5,7 @@ tb_test -r "$lbg_gui" lbg_get_gui
 
 
 # set bad GUI
-tb_test -i -c 2 lbg_set_gui badGUItool
+tb_test -i -c 1 lbg_set_gui badGUItool
 
 
 guis=()

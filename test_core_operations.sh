@@ -16,6 +16,14 @@ tb_test lb_is_integer 2
 tb_test lb_is_integer -99
 
 
+# is boolean
+tb_test -c 1 lb_is_boolean
+tb_test -c 1 lb_is_boolean TEST
+tb_test -c 1 lb_is_boolean 1
+tb_test lb_is_integer true
+tb_test lb_is_integer false
+
+
 # array contains
 tb_test lb_array_contains 2 1 2 3
 tb_test -c 1 lb_array_contains x
