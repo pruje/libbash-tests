@@ -11,7 +11,7 @@ tb_test -i -c 1 lbg_set_gui badGUItool
 guis=()
 # (un)comment to test gui tools
 
-if [ "$(lb_detect_os)" != "macOS" ] ; then
+if [ "$lb_current_os" != "macOS" ] ; then
 	echo
 	guis+=(kdialog)
 	guis+=(zenity)

@@ -15,7 +15,7 @@ tb_test -c 1 lb_dir_is_empty
 tb_test -c 1 lb_dir_is_empty notAdirectory
 tb_test -c 1 lb_dir_is_empty "$0"   # not a directory
 
-if [ "$(lb_detect_os)" != "macOS" ] ; then
+if [ "$lb_current_os" != "macOS" ] ; then
 	tb_test -c 2 lb_dir_is_empty /root
 fi
 tb_test -c 3 lb_dir_is_empty /

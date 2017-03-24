@@ -17,7 +17,7 @@ tb_test -r Hello lb_display Hello
 tb_test -r "[INFO]  Hello" lb_display -p -l INFO "Hello"
 
 # reset formatting
-if [ "$(lb_detect_os)" != "macOS" ] ; then
+if [ "$lb_current_os" != "macOS" ] ; then
 	lb_format_print=true
 fi
 
