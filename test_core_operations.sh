@@ -25,9 +25,28 @@ tb_test lb_is_integer false
 
 
 # array contains
-tb_test lb_array_contains 2 1 2 3
 tb_test -c 1 lb_array_contains x
 tb_test -c 2 lb_array_contains z a b c
+tb_test lb_array_contains 2 1 2 3
+
+
+# compare versions
+tb_test -c 1 lb_compare_versions a b
+tb_test -c 1 lb_compare_versions a b c
+tb_test -c 1 lb_compare_versions a b c
+tb_test -c 1 lb_compare_versions a.b -gt c.d
+tb_test -c 1 lb_compare_versions a -eq b
+tb_test lb_compare_versions a -eq a
+tb_test lb_compare_versions 1 -eq 1.0.0
+tb_test lb_compare_versions 1 -ge 1.0.0
+tb_test lb_compare_versions 1 -le 1.0.0
+tb_test lb_compare_versions 1 -gt 0.9.9
+tb_test lb_compare_versions 1 -lt 2.0.0
+tb_test lb_compare_versions 1.0-beta -eq 1.0.0-beta
+tb_test lb_compare_versions 1.0-beta -gt 1.0.0-alpha
+tb_test lb_compare_versions 1.0-beta -le 1.0.0-beta.0
+tb_test lb_compare_versions 1.0-beta -lt 1.0.0-rc
+tb_test lb_compare_versions 1.0-beta -le 1.0.0-beta
 
 
 # is comment
