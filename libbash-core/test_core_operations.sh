@@ -20,8 +20,14 @@ tb_test lb_is_integer -99
 tb_test -c 1 lb_is_boolean
 tb_test -c 1 lb_is_boolean TEST
 tb_test -c 1 lb_is_boolean 1
-tb_test lb_is_integer true
-tb_test lb_is_integer false
+tb_test lb_is_boolean true
+tb_test lb_is_boolean false
+
+
+# trim text
+tb_test -c 1 lb_trim
+tb_test -r "abc" lb_trim "    abc   "
+tb_test -r "a b c" lb_trim " a b c    "
 
 
 # array contains
