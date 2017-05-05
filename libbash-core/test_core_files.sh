@@ -7,10 +7,6 @@ tb_test -c 1 lb_homepath notAuser
 
 
 # test if directory is empty
-tb_test -c 1 lb_dir_is_empty notAdirectory
-
-
-# is empty
 tb_test -c 1 lb_dir_is_empty
 tb_test -c 1 lb_dir_is_empty notAdirectory
 tb_test -c 1 lb_dir_is_empty "$0"   # not a directory
