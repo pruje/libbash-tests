@@ -1,6 +1,7 @@
 # core utils tests
 
 # detect os
+tb_test lb_current_os
 tb_test lb_detect_os
 
 

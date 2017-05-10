@@ -22,7 +22,11 @@ xxx
 yyy
 EOF
 
-tb_test -i -c 4 lb_input_password -m 5 << EOF
+tb_test -i -c 4 lb_input_password -m 4 << EOF
+xxx
+EOF
+
+tb_test -i lb_input_password -m 3 << EOF
 xxx
 EOF
 
