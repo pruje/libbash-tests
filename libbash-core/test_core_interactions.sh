@@ -22,6 +22,10 @@ xxx
 yyy
 EOF
 
+tb_test -i -c 4 lb_input_password -m 5 << EOF
+xxx
+EOF
+
 tb_test -i lb_input_password -l "Please enter password 'xxx':" << EOF
 xxx
 EOF
