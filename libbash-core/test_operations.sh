@@ -24,6 +24,12 @@ tb_test lb_is_boolean true
 tb_test lb_is_boolean false
 
 
+# is email
+tb_test -c 1 lb_is_email domain.com
+tb_test -c 1 lb_is_email blah@blah
+tb_test lb_is_email me@domain.com
+
+
 # trim text
 tb_test -c 1 lb_trim
 tb_test -r "abc" lb_trim "    abc   "

@@ -22,20 +22,20 @@ if [ "$lb_current_os" != "macOS" ] ; then
 fi
 
 # define test log file
-t_logfile="./testbash_testlog.log"
+tb_logfile="./testbash_testlog.log"
 
 
 # set log file
 tb_test -c 2 lb_set_logfile /test.log
-tb_test -i lb_set_logfile "$t_logfile"
+tb_test -i lb_set_logfile "$tb_logfile"
 
 
 # get log file
-tb_test -r "$t_logfile" lb_get_logfile
+tb_test -r "$tb_logfile" lb_get_logfile
 
 
 # display messages
-tb_test -i lb_display_info --log Hello world!
+tb_test -i lb_display_info --log "Hello world"
 tb_test -i lb_display_warning "Don't panic!"
 tb_test -i lb_display_error "It's just an error."
 tb_test -i lb_display_debug "I don't care"
@@ -48,16 +48,18 @@ tb_test -i lb_set_loglevel INFO
 
 
 # print in log
-tb_test lb_log -n "its just..."
+tb_test lb_log -n "logline1"
+tb_test -r "logline1" tail -1 "$tb_logfile"
 tb_test -i lb_set_loglevel INFO
 tb_test lb_log Hello this is a log file
 tb_test lb_log -a -l ERROR This is an error
 tb_test lb_log -l INFO info
-tb_test -r info tail -n 1 "$t_logfile"
+tb_test -r info tail -n 1 "$tb_logfile"
 tb_test -i lb_display_debug You should not see that.
 tb_test lb_log -p -l DEBUG You should not see that.
+tb_test -r "info" tail -1 "$tb_logfile"
 tb_test lb_log
-tb_test -r "" tail -n 1 "$t_logfile"
+tb_test -r "" tail -n 1 "$tb_logfile"
 
 
 # print result
@@ -76,7 +78,7 @@ echo &> /dev/null
 tb_test -i lb_short_result --log $?
 
 # delete test log file
-rm -f "$t_logfile"
+rm -f "$tb_logfile"
 
 
 # avoid skipping tests if last failed
