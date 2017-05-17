@@ -40,6 +40,11 @@ tb_test -i lb_display_warning "Don't panic!"
 tb_test -i lb_display_error "It's just an error."
 tb_test -i lb_display_debug "I don't care"
 
+# display levels
+tb_test -i -c 2 lb_set_display_level BADLEVEL
+tb_test -i lb_set_display_level INFO
+tb_test lb_get_display_level
+tb_test -r "" lb_display --level DEBUG notDisplayed
 
 # log levels
 tb_test -r DEBUG lb_get_loglevel
