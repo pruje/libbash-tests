@@ -64,11 +64,11 @@ EOF
 tb_test -i -c 4 lbg_input_password -t "Enter 1 character" -l "Enter 1 character:" -m 2 <<EOF
 x
 EOF
-tb_test -i -c 3 lbg_input_password -t "Enter x" -c -l "Enter x:" --confirm-label "Enter y:" -m 1 <<EOF
+tb_test -i -c 3 lbg_input_password -t "Enter something" -c -l "Enter something:" --confirm-label "Enter something different:" -m 1 <<EOF
 x
 y
 EOF
-tb_test -i lbg_input_password -t "Enter x" -c -l "Enter x:" --confirm-label "Re-enter x:" -m 1 <<EOF
+tb_test -i lbg_input_password -t "Enter x twice" -c -l "Enter x:" --confirm-label "Re-enter x:" -m 1 <<EOF
 x
 x
 EOF

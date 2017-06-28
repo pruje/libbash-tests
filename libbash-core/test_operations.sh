@@ -49,6 +49,8 @@ tb_test -c 1 lb_compare_versions a b c
 tb_test -c 1 lb_compare_versions a.b -gt c.d
 tb_test -c 1 lb_compare_versions a -eq b
 tb_test lb_compare_versions a -eq a
+tb_test lb_compare_versions 0.1 -eq 0.1.0
+tb_test lb_compare_versions 0.0.1 -lt 0.0.2
 tb_test lb_compare_versions 1 -eq 1.0.0
 tb_test lb_compare_versions 1 -ge 1.0.0
 tb_test lb_compare_versions 1 -le 1.0.0
