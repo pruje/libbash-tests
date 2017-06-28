@@ -103,14 +103,22 @@ else
 	tb_test -i -c 2 lbg_choose_directory -t "Please_CANCEL"
 fi
 
-tb_test -i lbg_choose_directory -a / <<EOF
+if [ "$lb_current_os" == Windows ] ; then
+	# Windows systems
+	tb_test -i lbg_choose_directory -t "Please CHOOSE C:\\Users" -a /cygdrive/c/Users <<EOF
 EOF
-tb_test -r / -v $lbg_choose_directory
+	tb_test -r /cygdrive/c/Users -v $lbg_choose_directory
 
-tb_test -i lbg_choose_directory -a . <<EOF
+else
+	# other systems
+	tb_test -i lbg_choose_directory -a / <<EOF
 EOF
-tb_test -r "$(lb_abspath .)" -v $lbg_choose_directory
+	tb_test -r / -v $lbg_choose_directory
 
+	tb_test -i lbg_choose_directory -a . <<EOF
+EOF
+	tb_test -r "$(lb_abspath .)" -v $lbg_choose_directory
+fi
 
 # choose file
 tb_test -c 1 lbg_choose_file notAvalidPath
