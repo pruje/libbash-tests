@@ -59,16 +59,16 @@ EOF
 
 # input password
 tb_test -c 1 lbg_input_password -l
-tb_test -i -c 2 lbg_input_password -t CANCEL -l "CANCEL:" <<EOF
+tb_test -i -c 2 lbg_input_password -t CANCEL "CANCEL:" <<EOF
 EOF
-tb_test -i -c 4 lbg_input_password -t "Enter 1 character" -l "Enter 1 character:" -m 2 <<EOF
+tb_test -i -c 4 lbg_input_password -t "Enter 1 character" -m 2 "Enter 1 character:" <<EOF
 x
 EOF
-tb_test -i -c 3 lbg_input_password -t "Enter something" -c -l "Enter something:" --confirm-label "Enter something different:" -m 1 <<EOF
+tb_test -i -c 3 lbg_input_password -t "Enter something" -c --confirm-label "Enter something different:" -m 1 "Enter something:" <<EOF
 x
 y
 EOF
-tb_test -i lbg_input_password -t "Enter x twice" -c -l "Enter x:" --confirm-label "Re-enter x:" -m 1 <<EOF
+tb_test -i lbg_input_password -t "Enter x twice" -c --confirm-label "Re-enter x:" -m 1 "Enter x:" <<EOF
 x
 x
 EOF
