@@ -30,12 +30,12 @@ tb_test -i lb_input_password -m 3 << EOF
 xxx
 EOF
 
-tb_test -i lb_input_password -l "Please enter password 'xxx':" << EOF
+tb_test -i lb_input_password "Please enter password 'xxx':" << EOF
 xxx
 EOF
 tb_test -r xxx -v "$lb_input_password"
 
-tb_test -i lb_input_password -c -l "Please enter password 'xxx':" --confirm-label "Confirm xxx:" << EOF
+tb_test -i lb_input_password -c --confirm-label "Confirm xxx:" "Please enter password 'xxx':" << EOF
 xxx
 xxx
 EOF
@@ -82,6 +82,14 @@ tb_test -i -c 3 lb_choose_option choose a bad option << EOF
 9999
 EOF
 
+tb_test -i -c 3 lb_choose_option a b c << EOF
+1,2
+EOF
+
+tb_test -i lb_choose_option -m a b c << EOF
+1,3,3,1
+EOF
+tb_test -r "1 3" -v "${lb_choose_option[@]}"
 
 # avoid skipping tests if last failed
 return 0

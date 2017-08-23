@@ -147,6 +147,12 @@ tb_test -r "$(lb_abspath "$newfile")" -v "$lbg_choose_file"
 tb_test -c 1 lbg_open_directory badDirectory
 tb_test -c 1 lbg_open_directory -e
 tb_test -c 2 lbg_open_directory -e badCommand
+
+# testing custom explorers
+if lb_command_exists dolphin ; then
+	tb_test lbg_open_directory -e dolphin
+fi
+
 tb_test -c 4 lbg_open_directory badDirectory .
 
 if [ "$lb_current_os" == Windows ] ; then
