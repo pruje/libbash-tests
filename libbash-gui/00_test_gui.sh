@@ -156,7 +156,7 @@ fi
 tb_test -c 4 lbg_open_directory badDirectory .
 
 if [ "$lb_current_os" == Windows ] ; then
-	tb_test lbg_open_directory c:
+	tb_test lbg_open_directory "c:\\"
 else
 	tb_test lbg_open_directory /
 fi
