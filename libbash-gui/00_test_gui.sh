@@ -148,8 +148,12 @@ tb_test -c 1 lbg_open_directory badDirectory
 tb_test -c 1 lbg_open_directory -e
 tb_test -c 2 lbg_open_directory -e badCommand
 tb_test -c 4 lbg_open_directory badDirectory .
-tb_test lbg_open_directory .
 
+if [ "$lb_current_os" == Windows ] ; then
+	tb_test lbg_open_directory c:
+else
+	tb_test lbg_open_directory /
+fi
 
 # avoid skipping tests if last failed
 return 0
