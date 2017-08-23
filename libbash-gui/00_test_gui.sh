@@ -120,6 +120,7 @@ EOF
 	tb_test -r "$(lb_abspath .)" -v $lbg_choose_directory
 fi
 
+
 # choose file
 tb_test -c 1 lbg_choose_file notAvalidPath
 if [ "$(lbg_get_gui)" == "console" ] ; then
@@ -140,6 +141,14 @@ newfile="$(dirname "$BASH_SOURCE")/newFile"
 tb_test -i lbg_choose_file -a -s "$newfile" <<EOF
 EOF
 tb_test -r "$(lb_abspath "$newfile")" -v "$lbg_choose_file"
+
+
+# open directory
+tb_test -c 1 lbg_open_directory badDirectory
+tb_test -c 1 lbg_open_directory -e
+tb_test -c 2 lbg_open_directory -e badCommand
+tb_test -c 4 lbg_open_directory badDirectory .
+tb_test lbg_open_directory .
 
 
 # avoid skipping tests if last failed
