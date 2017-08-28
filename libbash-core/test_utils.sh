@@ -27,7 +27,8 @@ tb_test lb_generate_password 8
 
 
 # send email
-tb_test lb_email -s Test junk@example.com "This is a test email."
+# UNCOMMENT THIS LINE TO TEST IT
+#tb_test lb_email -s Test junk@example.com "This is a test email."
 
 
 # avoid skipping tests if last failed
