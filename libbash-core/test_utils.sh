@@ -31,7 +31,9 @@ tb_test lb_generate_password 8
 #tb_test lb_email -s Test junk@example.com "This is a test email."
 
 
-# import config files
+# read/import config files
+tb_test -c 1 lb_read_config
+tb_test -c 1 lb_read_config badConfigFile
 tb_test -c 1 lb_import_config
 tb_test -c 1 lb_import_config badConfigFile
 
@@ -61,6 +63,13 @@ tb_test -i lb_import_config -e "$configfile"
 cat >> "$configfile" <<EOF
 this is non sense
 EOF
+
+# read config
+tb_test -i lb_read_config "$configfile"
+tb_test -n "Config file lines > 0" [ ${#lb_read_config[@]} -gt 0 ]
+if [ $? == 0 ] ; then
+	tb_test -n "Last line of config file" -v -r "this is non sense" ${lb_read_config[${#lb_read_config[@]}-1]}
+fi
 
 # test import with errors
 tb_test -c 3 lb_import_config -e "$configfile"
