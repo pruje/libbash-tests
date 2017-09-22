@@ -8,7 +8,7 @@ tb_test lb_detect_os
 # test if a user exists
 tb_test -c 1 lb_user_exists
 tb_test -c 2 lb_user_exists badUserName
-tb_test lb_user_exists $(whoami)
+tb_test lb_user_exists $lb_current_user
 
 
 # test if a user is in a group
@@ -17,7 +17,19 @@ tb_test -c 3 lb_in_group group badUserName
 tb_test -c 2 lb_in_group badGroupName
 # test with getting the first group of current user
 test_groups=($(groups))
-tb_test lb_in_group $test_groups $(whoami)
+tb_test lb_in_group $test_groups $lb_current_user
+
+
+# get list of members of a group
+tb_test -c 1 lb_group_members
+
+if [ "$lb_current_os" == Linux ] ; then
+	tb_test -c 2 lb_group_members badGroupName
+	# on Ubuntu, this can return nothing, so we did not compare results
+	tb_test lb_group_members $lb_current_user
+else
+	tb_test -c 3 lb_group_members $lb_current_user
+fi
 
 
 # generate password
