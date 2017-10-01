@@ -57,7 +57,9 @@ boolean2=true
 configfile="./testbash_testconfig.conf"
 cat > "$configfile" <<EOF
 # this is a comment
+; this is another comment
 
+[global]
 boolean1=false
    boolean2 = false
 int1=99
@@ -66,11 +68,14 @@ arr1=("opt 1" "opt 2")
    arr2 = ("opt 1" "opt 2")
 str1="hello world"
    str2  =  "hello world"
+
+[part2]
+int1=88
 EOF
 
 # import config
 tb_test -i lb_import_config -e "$configfile"
-
+echo $?
 # adding bad parameters
 cat >> "$configfile" <<EOF
 this is non sense
@@ -83,8 +88,14 @@ if [ $? == 0 ] ; then
 	tb_test -n "Last line of config file" -v -r "this is non sense" ${lb_read_config[${#lb_read_config[@]}-1]}
 fi
 
+# read section
+tb_test -i lb_read_config -s global "$configfile"
+tb_test -n "Last line of global section" -v -r "str2 = \"hello world\"" ${lb_read_config[${#lb_read_config[@]}-1]}
+
 # test import with errors
 tb_test -c 3 lb_import_config -e "$configfile"
+
+tb_test -v -r 88 $int1
 
 # adding shell injection
 cat >> "$configfile" <<EOF
@@ -94,6 +105,10 @@ EOF
 # test import in unsecure mode
 tb_test -c 4 lb_import_config -e "$configfile"
 tb_test -c 3 -i lb_import_config -e -u "$configfile"
+tb_test -v -r "injection" "$unsecure"
+
+# test loading section
+tb_test -i lb_import_config -s global "$configfile"
 
 # test values
 tb_test -v -r false $boolean1
@@ -104,10 +119,28 @@ tb_test -v -r "opt 1" "${arr1[0]}"
 tb_test -v -r "${arr1[1]}" "${arr2[1]}"
 tb_test -v -r "hello world" "$str1"
 tb_test -v -r "$str1" "$str2"
-tb_test -v -r "injection" "$unsecure"
+
+# set values
+tb_test -c 1 lb_set_config
+tb_test -c 1 lb_set_config badConfigFile
+tb_test -c 1 lb_set_config "$configfile"
+tb_test -c 3 lb_set_config --strict "$configfile" badParameter value
+tb_test lb_set_config "$configfile" int1 101
+
+# test set values
+tb_test -i lb_import_config "$configfile"
+tb_test -v -r 101 $int1
+
+# set value in section
+tb_test lb_set_config -s global "$configfile" int1 101
+tb_test -i lb_import_config -s global "$configfile"
+tb_test -v -r 101 $int1
+tb_test lb_set_config -s part2 "$configfile" int1 102
+tb_test -i lb_import_config -s part2 "$configfile"
+tb_test -v -r 102 $int1
 
 # delete test config file
-rm -f "$configfile"
+rm -f "$configfile"*
 
 # avoid skipping tests if last failed
 return 0
