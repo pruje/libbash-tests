@@ -42,6 +42,18 @@ tb_test -c 2 lb_array_contains z a b c
 tb_test lb_array_contains 2 1 2 3
 
 
+# date to timestamp conversion
+tb_test -c 1 lb_date2timestamp
+tb_test -c 2 lb_date2timestamp badDate
+tb_test -r 1514764799 lb_date2timestamp --utc '2017-12-31 23:59:59'
+
+
+# timestamp to date conversion
+tb_test -c 1 lb_timestamp2date
+tb_test -c 1 lb_timestamp2date badTimestamp
+tb_test -r 20171231235959 lb_timestamp2date -f '%Y%m%d%H%M%S' --utc 1514764799
+
+
 # compare versions
 tb_test -c 1 lb_compare_versions a b
 tb_test -c 1 lb_compare_versions a b c
