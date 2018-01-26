@@ -6,9 +6,10 @@ tb_test lb_detect_os
 
 
 # test if a user exists
-tb_test -c 1 lb_user_exists
-tb_test -c 2 lb_user_exists badUserName
 tb_test lb_user_exists $lb_current_user
+tb_test -c 1 lb_user_exists
+tb_test -c 1 lb_user_exists badUserName
+tb_test -c 1 lb_user_exists $lb_current_user badUserName
 
 
 # test if a user is in a group

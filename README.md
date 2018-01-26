@@ -4,6 +4,9 @@ Unit tests for the [libbash.sh](https://github.com/pruje/libbash.sh) project.
 
 Some tests failed? Help us to improve libbash.sh project and [report a bug here](https://github.com/pruje/libbash.sh/issues)!
 
+**Please note that these tests are published for the latest development state.
+If some tests fails with libbash master branch, please checkout on the next-release branch of libbash.sh**
+
 ## Usage
 1. Clone testbash project: [https://github.com/pruje/testbash.git](https://github.com/pruje/testbash.git)
 2. Clone libbash.sh project: [https://github.com/pruje/libbash.sh.git](https://github.com/pruje/libbash.sh.git)

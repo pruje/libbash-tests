@@ -3,6 +3,7 @@
 # is a number
 tb_test -c 1 lb_is_number
 tb_test -c 1 lb_is_number TEST
+tb_test -c 1 lb_is_number 1 TEST
 tb_test lb_is_number 2
 tb_test lb_is_number -99
 tb_test lb_is_number 20.16
@@ -34,6 +35,21 @@ tb_test lb_is_email me@domain.com
 tb_test lb_trim
 tb_test -r "abc" lb_trim "    abc   "
 tb_test -r "a  b    c" lb_trim " a  b    c    "
+
+
+# split string
+tb_test -i lb_split ,
+tb_test -n "check lb_split empty" -r "" -v ${lb_split[@]}
+tb_test -i lb_split , "1,2,3,4"
+tb_test -n "check lb_split" -r "1 2 3 4" -v ${lb_split[@]}
+tb_test -c 1 lb_split
+
+
+# join array
+tb_test -r "" lb_join ,
+array=(1 2 3 4)
+tb_test -r "1,2,3,4" lb_join , ${array[@]}
+tb_test -c 1 lb_join
 
 
 # array contains

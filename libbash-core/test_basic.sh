@@ -1,16 +1,19 @@
 # core basic tests
 
 # command exists
-tb_test lb_command_exists echo Hello world!
-tb_test -c 1 lb_command_exists
-tb_test -c 2 lb_command_exists notAcommand
+tb_test lb_command_exists echo
+tb_test lb_command_exists echo true
+tb_test -c 1 lb_command_exists echo notAcommand
+tb_test -c 1 lb_command_exists notAcommand
 
 
 # function exists
-tb_test lb_function_exists lb_yesno
+tb_test lb_function_exists lb_command_exists
+tb_test lb_function_exists lb_command_exists lb_function_exists
 tb_test -c 1 lb_function_exists
 tb_test -c 2 lb_function_exists notAfunction
 tb_test -c 3 lb_function_exists echo
+tb_test -c 3 lb_function_exists lb_command_exists echo
 
 
 # test arguments
