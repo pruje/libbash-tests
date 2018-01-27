@@ -111,7 +111,7 @@ EOF
 
 else
 	# other systems
-	tb_test -i lbg_choose_directory -a / <<EOF
+	tb_test -i lbg_choose_directory -t "Please choose /" -a / <<EOF
 EOF
 	tb_test -r / -v $lbg_choose_directory
 
@@ -132,7 +132,7 @@ else
 fi
 
 # do not run with test function because of the * symbol
-lbg_choose_file -f '*.sh' "$0" <<EOF
+lbg_choose_file -t "Choose a SHELL file" -f '*.sh' "$0" <<EOF
 EOF
 tb_test -r "$(lb_abspath "$0")" -v "$(lb_abspath "$lbg_choose_file")"
 
