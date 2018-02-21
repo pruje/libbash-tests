@@ -1,34 +1,40 @@
 # core operations tests
 
 # is a number
-tb_test -c 1 lb_is_number
-tb_test -c 1 lb_is_number TEST
-tb_test -c 1 lb_is_number 1 TEST
 tb_test lb_is_number 2
 tb_test lb_is_number -99
 tb_test lb_is_number 20.16
 tb_test lb_is_number -0.9
+tb_test -c 1 lb_is_number
+tb_test -c 1 lb_is_number TEST
+tb_test -c 1 lb_is_number 1 TEST
+tb_test -c 1 lb_is_number " 123.45 "
 
 
 # is integer
+tb_test lb_is_integer 0
+tb_test lb_is_integer 123
+tb_test lb_is_integer -1
+tb_test lb_is_integer -99
 tb_test -c 1 lb_is_integer
 tb_test -c 1 lb_is_integer TEST
-tb_test lb_is_integer 2
-tb_test lb_is_integer -99
+tb_test -c 1 lb_is_integer " 123 "
 
 
 # is boolean
+tb_test lb_is_boolean true
+tb_test lb_is_boolean false
 tb_test -c 1 lb_is_boolean
 tb_test -c 1 lb_is_boolean TEST
 tb_test -c 1 lb_is_boolean 1
-tb_test lb_is_boolean true
-tb_test lb_is_boolean false
+tb_test -c 1 lb_is_boolean truefalse
 
 
 # is email
+tb_test lb_is_email me@domain.com
+tb_test lb_is_email me_at-my.domain@my.domain.com
 tb_test -c 1 lb_is_email domain.com
 tb_test -c 1 lb_is_email blah@blah
-tb_test lb_is_email me@domain.com
 
 
 # trim text
