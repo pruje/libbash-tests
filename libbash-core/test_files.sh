@@ -7,19 +7,19 @@ tb_test -c 1 lb_homepath notAuser
 
 
 # test if directory is empty
-tb_test -c 1 lb_dir_is_empty
-tb_test -c 1 lb_dir_is_empty notAdirectory
-tb_test -c 1 lb_dir_is_empty "$0"   # not a directory
+tb_test -c 1 lb_is_dir_empty
+tb_test -c 1 lb_is_dir_empty notAdirectory
+tb_test -c 1 lb_is_dir_empty "$0"   # not a directory
 
 if [ "$lb_current_os" == "Linux" ] ; then
-	tb_test -c 2 lb_dir_is_empty /root
+	tb_test -c 2 lb_is_dir_empty /root
 fi
 
-tb_test -c 3 lb_dir_is_empty /
+tb_test -c 3 lb_is_dir_empty /
 
 # test with an empty directory
 nulldir="emptyDirectory0001"
-tb_test mkdir "$nulldir" && tb_test lb_dir_is_empty "$nulldir"
+tb_test mkdir "$nulldir" && tb_test lb_is_dir_empty "$nulldir"
 rmdir "$nulldir" 2> /dev/null
 
 

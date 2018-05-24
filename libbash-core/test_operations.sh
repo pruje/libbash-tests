@@ -59,10 +59,10 @@ tb_test -c 1 lb_join
 
 
 # array contains
-tb_test lb_array_contains 2 1 2 3
-tb_test -c 1 lb_array_contains
-tb_test -c 2 lb_array_contains x
-tb_test -c 2 lb_array_contains z a b c
+tb_test lb_in_array 2 1 2 3
+tb_test -c 1 lb_in_array
+tb_test -c 2 lb_in_array x
+tb_test -c 2 lb_in_array z a b c
 
 
 # date to timestamp conversion
