@@ -1,13 +1,14 @@
 # core display and logs tests
 
 # print text
-lb_print -n No carriage return here:
-lb_print Next line
-lb_print --bold This is bold
-lb_print --cyan This is cyan
-lb_print --green This is green
-lb_print --yellow This is yellow
-lb_print --red This is red
+tb_test -i lb_print -n No carriage return here:
+tb_test -i lb_print Next line
+tb_test -i lb_echo Next line
+tb_test -i lb_print --bold This is bold
+tb_test -i lb_print --cyan This is cyan
+tb_test -i lb_print --green This is green
+tb_test -i lb_print --yellow This is yellow
+tb_test -i lb_print --red This is red
 
 # disable formatting to test result
 lb_format_print=false

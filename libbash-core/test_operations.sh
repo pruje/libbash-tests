@@ -45,21 +45,22 @@ tb_test -r "a  b    c" lb_trim " a  b    c    "
 
 # split string
 tb_test -i lb_split ,
-tb_test -n "check lb_split empty" -r "" -v ${lb_split[@]}
+tb_test -n "check lb_split empty" -r "" -v "${lb_split[@]}"
 tb_test -i lb_split , "1,2,3,4"
-tb_test -n "check lb_split" -r "1 2 3 4" -v ${lb_split[@]}
+tb_test -n "check lb_split" -r "1 2 3 4" -v "${lb_split[@]}"
 tb_test -c 1 lb_split
 
 
 # join array
 tb_test -r "" lb_join ,
 array=(1 2 3 4)
-tb_test -r "1,2,3,4" lb_join , ${array[@]}
+tb_test -r "1,2,3,4" lb_join , "${array[@]}"
 tb_test -c 1 lb_join
 
 
 # array contains
 tb_test lb_in_array 2 1 2 3
+tb_test lb_in_array "test 1" "test 1" "test 2"
 tb_test -c 1 lb_in_array
 tb_test -c 2 lb_in_array x
 tb_test -c 2 lb_in_array z a b c

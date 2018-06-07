@@ -40,5 +40,28 @@ if [ "$lb_current_os" == "Windows" ] ; then
 fi
 
 
+# is writable
+tb_test lb_is_writable .
+tb_test -c 1 lb_is_writable
+tb_test -c 2 lb_is_writable /
+tb_test -c 3 lb_is_writable /badFolder
+tb_test -c 4 lb_is_writable /badDirectory/badSubDirectory
+
+
+# edit file
+tb_test -c 1 lb_edit
+tb_test -c 4 lb_edit badFile
+
+tb_testfile="./testfile.txt"
+
+if echo 123 > "$tb_testfile" ; then
+	tb_test lb_edit 's/2/4/' "$tb_testfile"
+	tb_test -r 143 cat "$tb_testfile"
+else
+	tb_test false
+fi
+
+rm -f "$tb_testfile"
+
 # avoid skipping tests if last failed
 return 0
