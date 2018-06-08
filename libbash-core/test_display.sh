@@ -39,6 +39,7 @@ tb_test -r "$tb_logfile" lb_get_logfile
 tb_test -i lb_display_info --log "Hello world"
 tb_test -i lb_display_warning "Don't panic!"
 tb_test -i lb_display_error "It's just an error."
+tb_test -i lb_display_critical "It's worse..."
 tb_test -i lb_display_debug "I don't care"
 
 # display levels
@@ -59,6 +60,10 @@ tb_test -r "logline1" tail -1 "$tb_logfile"
 tb_test -i lb_set_loglevel INFO
 tb_test lb_log Hello this is a log file
 tb_test lb_log -a -l ERROR This is an error
+tb_test lb_log_info --log "Hello world"
+tb_test lb_log_warning "Don't panic!"
+tb_test lb_log_error "It's just an error."
+tb_test lb_log_critical "It's worse..."
 tb_test lb_log -l INFO info
 tb_test -r info tail -n 1 "$tb_logfile"
 tb_test -i lb_display_debug You should not see that.
