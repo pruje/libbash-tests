@@ -102,8 +102,9 @@ tb_test lb_compare_versions 1.0-beta -le 1.0.0-beta
 # is comment
 tb_test -c 1 lb_is_comment -s
 tb_test -c 3 lb_is_comment -n
-tb_test -c 2 lb_is_comment "Hello"
+tb_test -c 2 lb_is_comment Hello
 tb_test lb_is_comment "# Comment"
+tb_test lb_is_comment "    # Comment"
 tb_test lb_is_comment -s "//" "//Comment"
 
 

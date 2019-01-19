@@ -35,7 +35,7 @@ tb_test -c 1 lb_realpath notAFile
 tb_test lb_realpath "$0"
 
 # realpaths on windows
-if [ "$lb_current_os" == "Windows" ] ; then
+if [ "$lb_current_os" == Windows ] ; then
 	tb_test -r "/cygdrive/c/Users" lb_realpath "C:\\Users\\"
 fi
 
