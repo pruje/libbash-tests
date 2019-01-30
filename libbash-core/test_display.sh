@@ -15,15 +15,13 @@ lb_format_print=false
 
 # display text
 tb_test -r Hello lb_display Hello
-tb_test -r "[INFO]  Hello" lb_display -p -l INFO "Hello"
+tb_test -r "[INFO]  Hello" lb_display -p -l INFO Hello
 
 # reset formatting
-if [ "$lb_current_os" != "macOS" ] ; then
-	lb_format_print=true
-fi
+[ "$lb_current_os" != macOS ] && lb_format_print=true
 
 # define test log file
-tb_logfile="./testbash_testlog.log"
+tb_logfile=./testbash_testlog.log
 
 
 # set log file

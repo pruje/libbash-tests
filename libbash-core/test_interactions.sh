@@ -45,7 +45,7 @@ tb_test -r xxx -v "$lb_input_password"
 # yes or no
 tb_test -c 1 lb_yesno
 tb_test -i lb_yesno "Do you want to continue?" << EOF
-y
+$in_yes
 EOF
 
 tb_test -i lb_yesno -y --yes-label "yes" "Happy?" << EOF
@@ -56,7 +56,7 @@ tb_test -i -c 2 lb_yesno "Say no?" << EOF
 EOF
 
 tb_test -i -c 3 lb_yesno -c "Cancel?" << EOF
-c
+$in_cancel
 EOF
 
 

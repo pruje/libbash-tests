@@ -11,7 +11,7 @@ boolean1=true
 boolean2=true
 
 # create a config file
-configfile="./testbash_testconfig.conf"
+configfile=./testbash_testconfig.conf
 cat > "$configfile" <<EOF
 # this is a comment
 ; this is another comment

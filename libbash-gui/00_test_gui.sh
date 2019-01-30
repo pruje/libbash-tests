@@ -137,7 +137,7 @@ EOF
 tb_test -r "$(lb_abspath "$0")" -v "$(lb_abspath "$lbg_choose_file")"
 
 # save new file
-newfile="$(dirname "$BASH_SOURCE")/newFile"
+newfile=$(dirname "$BASH_SOURCE")/newFile
 tb_test -i lbg_choose_file -a -s "$newfile" <<EOF
 EOF
 tb_test -r "$(lb_abspath "$newfile")" -v "$lbg_choose_file"
