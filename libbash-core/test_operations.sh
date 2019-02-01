@@ -1,5 +1,11 @@
 # core operations tests
 
+# is boolean and true
+tb_test -c 1 lb_istrue
+tb_test -c 1 lb_istrue false
+tb_test -c 1 lb_istrue True
+tb_test lb_istrue true
+
 # is a number
 tb_test lb_is_number 2
 tb_test lb_is_number -99
