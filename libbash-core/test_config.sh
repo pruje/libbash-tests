@@ -32,16 +32,18 @@ EOF
 
 # import config
 tb_test -i lb_import_config -e "$configfile"
-echo $?
+
 # adding bad parameters
 cat >> "$configfile" <<EOF
 this is non sense
 EOF
 
 # read config
-tb_test -i lb_read_config "$configfile"
-tb_test -n "Config file lines > 0" [ ${#lb_read_config[@]} -gt 0 ]
-if [ $? == 0 ] ; then
+res=0
+tb_test -i lb_read_config "$configfile" || res=$?
+
+if [ $res == 0 ] ; then
+	tb_test -n "Config file lines > 0" [ ${#lb_read_config[@]} -gt 0 ] && \
 	tb_test -n "Last line of config file" -v -r "this is non sense" ${lb_read_config[${#lb_read_config[@]}-1]}
 fi
 

@@ -74,16 +74,18 @@ tb_test -r "" tail -n 1 "$tb_logfile"
 # print result
 tb_test -c 1 lb_result -l
 
-dumbcommand &> /dev/null
-tb_test -i -c 127 lb_result $?
+res=0
+dumbcommand &> /dev/null || res=$?
+tb_test -i -c 127 lb_result $res
 
-echo &> /dev/null
+true
 tb_test -i lb_result --log $?
 
-dumbcommand &> /dev/null
-tb_test -i -c 127 lb_short_result $?
+res=0
+dumbcommand &> /dev/null || res=$?
+tb_test -i -c 127 lb_short_result $res
 
-echo &> /dev/null
+true
 tb_test -i lb_short_result --log $?
 
 # delete test log file
