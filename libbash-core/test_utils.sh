@@ -25,7 +25,7 @@ tb_test lb_in_group $test_groups $lb_current_user
 tb_test -c 1 lb_group_members
 
 case $lb_current_os in
-	Linux)
+	BSD|Linux)
 		tb_test -c 2 lb_group_members badGroupName
 		# on Ubuntu, this can return nothing, so we did not compare results
 		tb_test lb_group_members $lb_current_user
