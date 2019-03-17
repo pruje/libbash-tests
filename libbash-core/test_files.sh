@@ -11,9 +11,14 @@ tb_test -c 1 lb_is_dir_empty
 tb_test -c 1 lb_is_dir_empty notAdirectory
 tb_test -c 1 lb_is_dir_empty "$0"   # not a directory
 
-if [ "$lb_current_os" == Linux ] ; then
-	tb_test -c 2 lb_is_dir_empty /root
-fi
+case $lb_current_os in
+	BSD|Linux)
+		tb_test -c 2 lb_is_dir_empty /root
+		;;
+	*)
+		# other OS not supported
+		;;
+esac
 
 tb_test -c 3 lb_is_dir_empty /
 
@@ -36,7 +41,7 @@ tb_test lb_realpath "$0"
 
 # realpaths on windows
 if [ "$lb_current_os" == Windows ] ; then
-	tb_test -r "/cygdrive/c/Users" lb_realpath "C:\\Users\\"
+	tb_test -r /cygdrive/c/Users lb_realpath "C:\\Users\\"
 fi
 
 
