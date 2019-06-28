@@ -10,6 +10,9 @@ tb_test -i lb_print --green This is green
 tb_test -i lb_print --yellow This is yellow
 tb_test -i lb_print --red This is red
 
+# test print with stdin mode
+tb_test -r "abc" -v "$(echo abc | lb_print)"
+
 # disable formatting to test result
 lb__format_print=false
 

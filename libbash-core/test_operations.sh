@@ -46,6 +46,7 @@ tb_test -c 1 lb_is_email blah@blah
 # trim text
 tb_test lb_trim
 tb_test -r "abc" lb_trim "    abc   "
+tb_test -r "abc" -v "$(echo '   abc   ' | lb_trim)"
 tb_test -r "a  b    c" lb_trim " a  b    c    "
 
 
