@@ -7,7 +7,7 @@ fi
 
 
 # get GUI
-tb_test -r "$lbg_gui" lbg_get_gui
+tb_test -r "$lbg__gui" lbg_get_gui
 
 
 # set bad GUI

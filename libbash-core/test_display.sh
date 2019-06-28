@@ -11,14 +11,14 @@ tb_test -i lb_print --yellow This is yellow
 tb_test -i lb_print --red This is red
 
 # disable formatting to test result
-lb_format_print=false
+lb__format_print=false
 
 # display text
 tb_test -r Hello lb_display Hello
 tb_test -r "[INFO]  Hello" lb_display -p -l INFO Hello
 
 # reset formatting
-[ "$lb_current_os" != macOS ] && lb_format_print=true
+[ "$lb_current_os" != macOS ] && lb__format_print=true
 
 # define test log file
 tb_logfile=./testbash_testlog.log
