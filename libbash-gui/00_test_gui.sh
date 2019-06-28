@@ -26,7 +26,7 @@ fi
 # display info
 tb_test -c 1 lbg_display_info
 tb_test -i lbg_display_info "This is a message for you."
-
+tb_test -n "display from stdin" -v $(echo "This is a text from stdin" | lbg_info; echo $?)
 
 # display warning
 tb_test -c 1 lbg_display_warning
@@ -47,7 +47,7 @@ tb_test -i lbg_display_debug -t DEBUG "This is a debug message for you."
 tb_test -c 1 lbg_notify
 tb_test -i lbg_notify -t TEST "This is a notification test"
 tb_test -i lbg_notify --timeout 5 "This notification will disappear in 5 seconds..."
-
+tb_test -n "notify from stdin" -v $(echo "Test from stdin" | lbg_notify; echo $?)
 
 # input text
 tb_test -c 1 lbg_input_text

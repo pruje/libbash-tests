@@ -59,6 +59,11 @@ if [ -n "$tb_email_dest" ] ; then
 	# wait to avoid bugs
 	sleep 2
 
+	tb_test -n "Email from stdin" -r 0 -v $(echo "This is an email from stdin" | lb_email $tb_email_dest; echo $?)
+
+	# wait to avoid bugs
+	sleep 2
+
 	tb_test -n "HTML/txt email" lb_email -s "$tb_email_prefix Multipart HTML/TXT email" --html \
 		"This is a multipart email sent by <a href='https://github.com/pruje/libbash.sh'>libbash.sh</a>, and you are reading the HTML part." \
 		$tb_email_dest "This is a multipart email, and you are reading the text part."

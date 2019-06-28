@@ -111,6 +111,7 @@ tb_test -c 1 lb_is_comment -s
 tb_test -c 3 lb_is_comment -n
 tb_test -c 2 lb_is_comment Hello
 tb_test lb_is_comment "# Comment"
+tb_test -r 0 -v $(echo "# Comment" | lb_is_comment; echo $?)
 tb_test lb_is_comment "    # Comment"
 tb_test lb_is_comment -s "//" "//Comment"
 
