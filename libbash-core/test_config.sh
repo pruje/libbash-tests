@@ -26,6 +26,9 @@ arr1=("opt 1" "opt 2")
 str1="hello world"
    str2  =  "hello world"
 
+[part1]
+int1=11
+
 [part2]
 int1=88
 EOF
@@ -95,6 +98,17 @@ tb_test lb_set_config -s global "$configfile" int1 101
 tb_test -r 101 lb_get_config -s global "$configfile" int1
 tb_test lb_set_config -s part2 "$configfile" int1 102
 tb_test -r 102 lb_get_config -s part2 "$configfile" int1
+
+# test migrate config
+cat > "$configfile".new <<EOF
+[part1]
+int1 =
+EOF
+
+tb_test -c 1 lb_migrate_config
+tb_test -c 1 lb_migrate_config badFile
+tb_test lb_migrate_config "$configfile" "$configfile".new
+tb_test -r 11 lb_get_config -s part1 "$configfile".new int1
 
 # delete test config file
 rm -f "$configfile"*
