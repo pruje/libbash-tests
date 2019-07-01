@@ -1,8 +1,6 @@
 # libbash gui tests for cscript (Windows)
 
-if [ "$lb_current_os" != Windows ] ; then
-	return 0
-fi
+[ "$lb_current_os" != Windows ] && return 0
 
 gui=cscript
 

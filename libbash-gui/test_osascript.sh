@@ -1,8 +1,6 @@
 # libbash gui tests for osascript (macOS)
 
-if [ "$lb_current_os" != macOS ] ; then
-	return 0
-fi
+[ "$lb_current_os" != macOS ] && return 0
 
 gui=osascript
 

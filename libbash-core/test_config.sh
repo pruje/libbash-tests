@@ -58,7 +58,7 @@ tb_test -n "Last line of global section" -r "str2 = \"hello world\"" -v ${lb_rea
 # test import with errors
 tb_test -c 3 lb_import_config -e "$configfile"
 
-tb_test -r 88 -v $int1
+tb_test -n "Imported part2.int1" -r 88 -v $int1
 
 # adding shell injection
 cat >> "$configfile" <<EOF
