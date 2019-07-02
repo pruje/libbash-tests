@@ -67,21 +67,22 @@ EOF
 
 # test import in unsecure mode
 tb_test -c 4 lb_import_config -e "$configfile"
+tb_test -n "code injection avoided" -r "" -v "$unsecure"
 tb_test -c 3 -i lb_import_config -e -u "$configfile"
-tb_test -r "injection" -v "$unsecure"
+tb_test -n "code injection succeeded" -r injection -v "$unsecure"
 
 # test loading section
 tb_test -i lb_import_config -s global "$configfile"
 
 # test values
-tb_test -r false -v $boolean1
-tb_test -r $boolean1 -v $boolean2
-tb_test -r 99 -v $int1
-tb_test -r $int1 -v $int2
-tb_test -r "opt 1" -v "${arr1[0]}"
-tb_test -r "${arr1[1]}" -v "${arr2[1]}"
-tb_test -r "hello world" -v "$str1"
-tb_test -r "$str1" -v "$str2"
+tb_test -n "imported boolean1" -r false -v $boolean1
+tb_test -n "imported boolean2" -r false -v $boolean2
+tb_test -n "imported int1" -r 99 -v $int1
+tb_test -n "imported int2" -r 99 -v $int2
+tb_test -n "imported arr1[0]" -r "opt 1" -v "${arr1[0]}"
+tb_test -n "imported arr2[1]" -r "opt 2" -v "${arr2[1]}"
+tb_test -n "imported str1" -r "hello world" -v "$str1"
+tb_test -n "imported str2" -r "hello world" -v "$str2"
 
 # set values
 tb_test -c 1 lb_set_config
