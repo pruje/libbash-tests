@@ -18,23 +18,79 @@ cat > "$configfile" <<EOF
 
 [global]
 boolean1=false
-   boolean2 = false
+boolean2 = false
 int1=99
-   int2 = 99
+int2 = 99
 arr1=("opt 1" "opt 2")
-   arr2 = ("opt 1" "opt 2")
+arr2 = ("opt 1" "opt 2")
 str1="hello world"
-   str2  =  "hello world"
+str2  =  "hello world"
+
+[part0]
+int0 = 00
 
 [part1]
 int1=11
+#default1 =
+;default2 =
 
 [part2]
 int1=88
+
 EOF
 
-# import config
-tb_test -i -c 2 lb_import_config -e "$configfile" onlyThisParam
+# analyse config file
+tb_test -i lb_read_config -a "$configfile"
+for c in $(seq 0 12) ; do
+	case $c in
+		0)
+			p=global.boolean1
+			;;
+		1)
+			p=global.boolean2
+			;;
+		2)
+			p=global.int1
+			;;
+		3)
+			p=global.int2
+			;;
+		4)
+			p=global.arr1
+			;;
+		5)
+			p=global.arr2
+			;;
+		6)
+			p=global.str1
+			;;
+		7)
+			p=global.str2
+			;;
+		8)
+			p=part0.int0
+			;;
+		9)
+			p=part1.int1
+			;;
+		10)
+			p=part1.default1
+			;;
+		11)
+			p=part1.default2
+			;;
+		12)
+			p=part2.int1
+			;;
+	esac
+	tb_test -n "Analysed config file $c" -r "$p" -v "${lb_read_config[c]}"
+done
+
+# partial import
+tb_test -i lb_import_config -e "$configfile" part0.int0
+tb_test -n "Partial import" -r 00 -v $int0
+
+# complete import
 tb_test -i lb_import_config -e "$configfile"
 
 # adding bad parameters
