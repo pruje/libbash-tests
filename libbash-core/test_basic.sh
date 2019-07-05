@@ -41,6 +41,7 @@ tb_test -c 1 lb_getopt
 tb_test -c 1 lb_getopt --opt
 tb_test -c 1 lb_getopt --opt --opt2
 tb_test -r value lb_getopt --opt value
+tb_test -r value2 lb_getopt --opt2=value2
 
 
 # avoid skipping tests if last failed
