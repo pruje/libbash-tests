@@ -140,10 +140,16 @@ tb_test -n "imported arr2[1]" -r "opt 2" -v "${arr2[1]}"
 tb_test -n "imported str1" -r "hello world" -v "$str1"
 tb_test -n "imported str2" -r "hello world" -v "$str2"
 
+# get config errors
+tb_test -c 1 lb_get_config
+tb_test -c 1 lb_get_config badConfigFile
+tb_test -c 1 lb_get_config "$configfile" bad/parameter
+
 # set values
 tb_test -c 1 lb_set_config
 tb_test -c 1 lb_set_config badConfigFile
 tb_test -c 1 lb_set_config "$configfile"
+tb_test -c 1 lb_set_config "$configfile" bad/parameter
 tb_test -c 3 lb_set_config --strict "$configfile" badParameter value
 tb_test lb_set_config "$configfile" int1 101
 
