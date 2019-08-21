@@ -31,7 +31,9 @@ rmdir "$nulldir" 2> /dev/null
 # abspath
 tb_test -c 1 lb_abspath
 tb_test -c 2 lb_abspath badDirectory/file.txt
-tb_test -i lb_abspath "$0"
+tb_test -c 2 lb_abspath /badDirectory/file.txt
+tb_test lb_abspath -n /badDirectory/file.txt
+tb_test lb_abspath "$0"
 
 
 # realpath
