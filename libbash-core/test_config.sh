@@ -23,8 +23,9 @@ int1=99
 int2 = 99
 arr1=("opt 1" "opt 2")
 arr2 = ("opt 1" "opt 2")
-str1="hello world"
-str2  =  "hello world"
+str1 = hi
+str2="hello world"
+str3  =  'hello world '
 
 [part0]
 int0 = 00
@@ -41,7 +42,7 @@ EOF
 
 # analyse config file
 tb_test -i lb_read_config -a "$configfile"
-for c in $(seq 0 12) ; do
+for c in $(seq 0 13) ; do
 	case $c in
 		0)
 			p=global.boolean1
@@ -68,18 +69,21 @@ for c in $(seq 0 12) ; do
 			p=global.str2
 			;;
 		8)
-			p=part0.int0
+			p=global.str3
 			;;
 		9)
-			p=part1.int1
+			p=part0.int0
 			;;
 		10)
-			p=part1.default1
+			p=part1.int1
 			;;
 		11)
-			p=part1.default2
+			p=part1.default1
 			;;
 		12)
+			p=part1.default2
+			;;
+		13)
 			p=part2.int1
 			;;
 	esac
@@ -109,7 +113,7 @@ fi
 
 # read section
 tb_test -i lb_read_config -s global "$configfile"
-tb_test -n "Last line of global section" -r "str2 = \"hello world\"" -v ${lb_read_config[${#lb_read_config[@]}-1]}
+tb_test -n "Last line of global section" -r "str3 = 'hello world '" -v ${lb_read_config[${#lb_read_config[@]}-1]}
 
 # test import with errors
 tb_test -c 3 lb_import_config -e "$configfile"
@@ -137,13 +141,19 @@ tb_test -n "imported int1" -r 99 -v $int1
 tb_test -n "imported int2" -r 99 -v $int2
 tb_test -n "imported arr1[0]" -r "opt 1" -v "${arr1[0]}"
 tb_test -n "imported arr2[1]" -r "opt 2" -v "${arr2[1]}"
-tb_test -n "imported str1" -r "hello world" -v "$str1"
+tb_test -n "imported str1" -r hi -v "$str1"
 tb_test -n "imported str2" -r "hello world" -v "$str2"
+tb_test -n "imported str3" -r "hello world " -v "$str3"
 
 # get config errors
 tb_test -c 1 lb_get_config
 tb_test -c 1 lb_get_config badConfigFile
 tb_test -c 1 lb_get_config "$configfile" bad/parameter
+
+# get config
+tb_test -r hi lb_get_config "$configfile" str1
+tb_test -r "hello world" lb_get_config "$configfile" str2
+tb_test -r "hello world " lb_get_config "$configfile" str3
 
 # set values
 tb_test -c 1 lb_set_config
@@ -159,6 +169,8 @@ tb_test -r 99 lb_get_config "$configfile" int1
 # set value in section
 tb_test lb_set_config -s global "$configfile" int1 101
 tb_test -r 101 lb_get_config -s global "$configfile" int1
+tb_test lb_set_config -s global "$configfile" str4 'with spaces'
+tb_test -r 'with spaces' lb_get_config -s global "$configfile" str4
 tb_test lb_set_config -s part2 "$configfile" int1 102
 tb_test -r 102 lb_get_config -s part2 "$configfile" int1
 
