@@ -50,8 +50,8 @@ fi
 # is writable
 tb_test lb_is_writable .
 tb_test -c 1 lb_is_writable
-tb_test -c 2 lb_is_writable /
-tb_test -c 3 lb_is_writable /badFolder
+[ "$lb_current_os" != Windows ] && tb_test -c 2 lb_is_writable /
+[ "$lb_current_os" != Windows ] && tb_test -c 3 lb_is_writable /badFolder
 tb_test -c 4 lb_is_writable /badDirectory/badSubDirectory
 
 

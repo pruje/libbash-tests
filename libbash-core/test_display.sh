@@ -28,7 +28,7 @@ tb_logfile=./testbash_testlog.log
 
 
 # set log file
-tb_test -c 2 lb_set_logfile /test.log
+[ "$lb_current_os" != Windows ] && tb_test -c 2 lb_set_logfile /test.log
 tb_test -i lb_set_logfile "$tb_logfile"
 
 
