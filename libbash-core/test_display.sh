@@ -26,6 +26,8 @@ tb_test -r "[INFO]  Hello" lb_display -p -l INFO Hello
 # define test log file
 tb_logfile=./testbash_testlog.log
 
+# delete test log file if exists
+rm -f "$tb_logfile"
 
 # set log file
 [ "$lb_current_os" != Windows ] && tb_test -c 2 lb_set_logfile /test.log
