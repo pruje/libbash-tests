@@ -58,12 +58,9 @@ tb_test -c 4 lb_is_writable /badDirectory/badSubDirectory
 # edit file
 tb_test -c 1 lb_edit
 
-if sed --version &> /dev/null ; then
-	tb_test -c 4 lb_edit badFile
-else
-	# old sed
-	tb_test -c 1 lb_edit badFile
-fi
+# Depending on sed version, if file does not exists,
+# error codes can be different.
+tb_test -c 1 -c 4 lb_edit badFile
 
 tb_testfile=./testfile.txt
 
