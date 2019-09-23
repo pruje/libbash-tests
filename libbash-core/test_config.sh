@@ -161,10 +161,10 @@ tb_test -c 1 lb_set_config badConfigFile
 tb_test -c 1 lb_set_config "$configfile"
 tb_test -c 1 lb_set_config "$configfile" bad/parameter
 tb_test -c 3 lb_set_config --strict "$configfile" badParameter value
-tb_test lb_set_config "$configfile" int1 101
+tb_test lb_set_config "$configfile" int1 01
 
-# test set values
-tb_test -r 99 lb_get_config "$configfile" int1
+# test values
+tb_test -r 01 lb_get_config "$configfile" int1
 
 # set value in section
 tb_test lb_set_config -s global "$configfile" int1 101
