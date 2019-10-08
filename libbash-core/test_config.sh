@@ -12,12 +12,11 @@ boolean2=true
 
 # create a config file
 configfile=./testbash_testconfig.conf
-cat > "$configfile" <<EOF
-# this is a comment
-; this is another comment
 
-[global]
-boolean1=false
+tb_test -n "Create config file" touch "$configfile"
+tb_test lb_set_config -s global "$configfile" boolean1 false
+
+cat >> "$configfile" <<EOF
 boolean2 = false
 int1=99
 int2 = 99
