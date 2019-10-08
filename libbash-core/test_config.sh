@@ -13,10 +13,14 @@ boolean2=true
 # create a config file
 configfile=./testbash_testconfig.conf
 
+# test with empty file
 tb_test -n "Create config file" touch "$configfile"
-tb_test lb_set_config -s global "$configfile" boolean1 false
+tb_test lb_set_config "$configfile" test false
 
-cat >> "$configfile" <<EOF
+# reset config
+cat > "$configfile" <<EOF
+[global]
+boolean1=false
 boolean2 = false
 int1=99
 int2 = 99
