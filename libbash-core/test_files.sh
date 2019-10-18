@@ -13,7 +13,7 @@ tb_test -c 1 lb_is_dir_empty "$0"   # not a directory
 
 case $lb_current_os in
 	BSD|Linux)
-		tb_test -c 2 lb_is_dir_empty /root
+		[ "$lb_current_user" != root ] && tb_test -c 2 lb_is_dir_empty /root
 		;;
 	*)
 		# other OS not supported
@@ -50,8 +50,10 @@ fi
 # is writable
 tb_test lb_is_writable .
 tb_test -c 1 lb_is_writable
-[ "$lb_current_os" != Windows ] && tb_test -c 2 lb_is_writable /
-[ "$lb_current_os" != Windows ] && tb_test -c 3 lb_is_writable /badFolder
+if [ "$lb_current_os" != Windows ] && [ "$lb_current_user" != root ] ; then
+	tb_test -c 2 lb_is_writable /
+	tb_test -c 3 lb_is_writable /badFolder
+fi
 tb_test -c 4 lb_is_writable /badDirectory/badSubDirectory
 
 

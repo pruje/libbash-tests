@@ -30,7 +30,9 @@ tb_logfile=./testbash_testlog.log
 rm -f "$tb_logfile"
 
 # set log file
-[ "$lb_current_os" != Windows ] && tb_test -c 2 lb_set_logfile /test.log
+if [ "$lb_current_os" != Windows ] && [ "$lb_current_user" != root ] ; then
+	tb_test -c 2 lb_set_logfile /test.log
+fi
 tb_test -i lb_set_logfile "$tb_logfile"
 
 
