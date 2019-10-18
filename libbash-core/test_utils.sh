@@ -40,7 +40,8 @@ esac
 # generate password
 tb_test -c 1 lb_generate_password aaa
 tb_test lb_generate_password
-tb_test lb_generate_password 8
+pwd=$(lb_generate_password 8)
+tb_test -n "Generate password of 8 characters" [ ${#pwd} == 8 ]
 
 
 # send email
