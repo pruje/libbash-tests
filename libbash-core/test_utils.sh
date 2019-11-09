@@ -27,11 +27,11 @@ tb_test -c 1 lb_group_exists
 case $lb_current_os in
 	BSD|Linux)
 		tb_test -c 1 lb_group_exists badGroupName
-		tb_test lb_group_exists $(groups 2> /dev/null)
+		tb_test lb_group_exists $(groups 2> /dev/null | awk '{ print $1 }')
 		;;
 	*)
 		# other OS not supported
-		tb_test -c 2 lb_group_exists $(groups 2> /dev/null)
+		tb_test -c 2 lb_group_exists anygroup
 		;;
 esac
 
