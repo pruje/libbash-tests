@@ -64,12 +64,14 @@ EOF
 
 
 # choose option
-tb_test -i -c 2 lbg_choose_option -l "CANCEL:" bad option <<EOF
+tb_test -i -c 2 lbg_choose_option -l "Please CANCEL:" bad option <<EOF
 EOF
-tb_test -i lbg_choose_option -t TEST -d 2 -l "Choose2:" one two three <<EOF
+tb_test -i lbg_choose_option -t TEST -d 2 -l "Please choose 2:" one two three <<EOF
 EOF
 tb_test -n "Chosen option" -r 2 -v $lbg_choose_option
-
+tb_test -i lbg_choose_option -t TEST -m -d 1,3 -l "Please choose 1 and 3:" one two three <<EOF
+EOF
+tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
 
 # choose directory
 if [ "$(lbg_get_gui)" == console ] ; then
