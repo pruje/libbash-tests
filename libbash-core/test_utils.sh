@@ -21,13 +21,28 @@ test_groups=($(groups))
 tb_test lb_in_group $test_groups $lb_current_user
 
 
-# get list of members of a group
+# test if a group exists
+tb_test -c 1 lb_group_exists
+
+case $lb_current_os in
+	BSD|Linux)
+		tb_test -c 1 lb_group_exists badGroupName
+		tb_test lb_group_exists $(groups 2> /dev/null)
+		;;
+	*)
+		# other OS not supported
+		tb_test -c 2 lb_group_exists $(groups 2> /dev/null)
+		;;
+esac
+
+
+# get members of a group
 tb_test -c 1 lb_group_members
 
 case $lb_current_os in
 	BSD|Linux)
 		tb_test -c 2 lb_group_members badGroupName
-		# on Ubuntu, this can return nothing, so we did not compare results
+		# on Ubuntu, this may return nothing, so we did not check results
 		tb_test lb_group_members $lb_current_user
 		;;
 	*)
