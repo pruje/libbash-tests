@@ -69,9 +69,15 @@ EOF
 tb_test -i lbg_choose_option -t TEST -d 2 -l "Please choose 2:" one two three <<EOF
 EOF
 tb_test -n "Chosen option" -r 2 -v $lbg_choose_option
-tb_test -i lbg_choose_option -t TEST -m -d 1,3 -l "Please choose 1 and 3:" one two three <<EOF
+
+# choose multiple options
+res=0
+# macOS not compatible yet
+[ "$lb_current_os" == macOS ] && res=1
+tb_test -i -c $res lbg_choose_option -t TEST -m -d 1,3 -l "Please choose 1 and 3:" one two three <<EOF
 EOF
-tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
+[ $res == 0 ] && tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
+
 
 # choose directory
 if [ "$(lbg_get_gui)" == console ] ; then
