@@ -85,8 +85,10 @@ res=0
 dumbcommand &> /dev/null || res=$?
 tb_test -i -c 127 lb_result $res
 
-true
-tb_test -i lb_result --log $?
+tb_test -i lb_result --log 0
+tb_test -i lb_result -d INFO -l INFO 0
+tb_test -r '' lb_result -d DEBUG -l DEBUG 0
+tb_test -i lb_result --log --smart-levels 0
 
 res=0
 dumbcommand &> /dev/null || res=$?
