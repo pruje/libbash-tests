@@ -109,7 +109,7 @@ EOF
 res=0
 tb_test -i lb_read_config "$configfile" || res=$?
 
-if [ $res == 0 ] ; then
+if [ $res = 0 ] ; then
 	tb_test -n "Config file lines > 0" [ ${#lb_read_config[@]} -gt 0 ] && \
 	tb_test -n "Last line of config file" -r "this is non sense" -v ${lb_read_config[${#lb_read_config[@]}-1]}
 fi

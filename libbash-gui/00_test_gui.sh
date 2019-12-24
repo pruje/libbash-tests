@@ -73,14 +73,14 @@ tb_test -n "Chosen option" -r 2 -v $lbg_choose_option
 # choose multiple options
 res=0
 # macOS not compatible yet
-[ "$(lbg_get_gui)" == osascript ] && res=1
+[ "$(lbg_get_gui)" = osascript ] && res=1
 tb_test -i -c $res lbg_choose_option -t TEST -m -d 1,3 -l "Please choose 1 and 3:" one two three <<EOF
 EOF
-[ $res == 0 ] && tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
+[ $res = 0 ] && tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
 
 
 # choose directory
-if [ "$(lbg_get_gui)" == console ] ; then
+if [ "$(lbg_get_gui)" = console ] ; then
 	tb_test -i -c 3 lbg_choose_directory -t "Please_CANCEL" <<EOF
 badDirectory!
 EOF
@@ -88,7 +88,7 @@ else
 	tb_test -i -c 2 lbg_choose_directory -t "Please_CANCEL"
 fi
 
-if [ "$lb_current_os" == Windows ] ; then
+if [ "$lb_current_os" = Windows ] ; then
 	# Windows systems
 	tb_test -i lbg_choose_directory -t "Please CHOOSE C:\\Users" -a /cygdrive/c/Users <<EOF
 EOF
@@ -107,7 +107,7 @@ fi
 
 
 # choose file
-if [ "$(lbg_get_gui)" == console ] ; then
+if [ "$(lbg_get_gui)" = console ] ; then
 	tb_test -i -c 3 lbg_choose_file -t "Please_CANCEL" <<EOF
 badFile!
 EOF
@@ -135,7 +135,7 @@ fi
 
 tb_test -c 4 lbg_open_directory badDirectory .
 
-if [ "$lb_current_os" == Windows ] ; then
+if [ "$lb_current_os" = Windows ] ; then
 	tb_test lbg_open_directory "c:\\"
 else
 	tb_test lbg_open_directory /
