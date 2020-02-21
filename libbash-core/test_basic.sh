@@ -45,4 +45,4 @@ tb_test -r value2 lb_getopt --opt2=value2
 
 
 # avoid skipping tests if last failed
-return 0
+true

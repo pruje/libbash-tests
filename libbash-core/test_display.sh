@@ -102,4 +102,4 @@ rm -f "$tb_logfile"
 
 
 # avoid skipping tests if last failed
-return 0
+true

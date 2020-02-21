@@ -191,5 +191,6 @@ tb_test -r 11 lb_get_config -s part1 "$configfile".new int1
 # delete test config file
 rm -f "$configfile"*
 
+
 # avoid skipping tests if last failed
-return 0
+true

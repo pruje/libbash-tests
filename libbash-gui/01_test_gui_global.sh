@@ -38,5 +38,6 @@ tb_test -c 1 lbg_open_directory badDirectory
 tb_test -c 1 lbg_open_directory -e
 tb_test -c 2 lbg_open_directory -e badCommand
 
+
 # avoid skipping tests if last failed
-return 0
+true

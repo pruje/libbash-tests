@@ -91,5 +91,6 @@ tb_test -i lb_choose_option -m a b c << EOF
 EOF
 tb_test -r "1 3" -v "${lb_choose_option[@]}"
 
+
 # avoid skipping tests if last failed
-return 0
+true

@@ -66,17 +66,14 @@ EOF
 # choose option
 tb_test -i -c 2 lbg_choose_option -l "Please CANCEL:" bad option <<EOF
 EOF
-tb_test -i lbg_choose_option -t TEST -d 2 -l "Please choose 2:" one two three <<EOF
+tb_test -i lbg_choose_option -t TEST -d 2 -l "Please choose 2:" "First option" "Second option" "Third option" <<EOF
 EOF
 tb_test -n "Chosen option" -r 2 -v $lbg_choose_option
 
 # choose multiple options
-res=0
-# macOS not compatible yet
-[ "$(lbg_get_gui)" = osascript ] && res=1
-tb_test -i -c $res lbg_choose_option -t TEST -m -d 1,3 -l "Please choose 1 and 3:" one two three <<EOF
+tb_test -i lbg_choose_option -t TEST -m -d 1,3 -l "Please choose 1 and 3:" "First option" "Second option" "Third option" <<EOF
 EOF
-[ $res = 0 ] && tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
+tb_test -n "Chosen option" -r "1 3" -v "${lbg_choose_option[*]}"
 
 
 # choose directory
@@ -141,5 +138,6 @@ else
 	tb_test lbg_open_directory /
 fi
 
+
 # avoid skipping tests if last failed
-return 0
+true
