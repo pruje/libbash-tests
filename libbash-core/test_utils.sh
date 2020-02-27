@@ -75,7 +75,7 @@ if [ -n "$tb_email_dest" ] ; then
 	# wait to avoid bugs
 	sleep 2
 
-	tb_test -n "Email from stdin" -r 0 -v $(echo "This is an email from stdin" | lb_email $tb_email_dest; echo $?)
+	tb_test -n "Email from stdin" -r 0 -v $(echo "This is an email from stdin" | lb_email -s "$tb_email_prefix Email from stdin" $tb_email_dest; echo $?)
 
 	# wait to avoid bugs
 	sleep 2
