@@ -43,7 +43,11 @@ int1=88
 
 EOF
 
-# analyse config file
+
+#
+#  Analyse config
+#
+
 tb_test -i lb_read_config -a "$configfile"
 for c in $(seq 0 13) ; do
 	case $c in
@@ -93,6 +97,11 @@ for c in $(seq 0 13) ; do
 	tb_test -n "Analysed config file $c" -r "$p" -v "${lb_read_config[c]}"
 done
 
+
+#
+#  Import config (1)
+#
+
 # partial import
 tb_test -i lb_import_config -e "$configfile" part0.int0
 tb_test -n "Partial import" -r 00 -v $int0
@@ -101,11 +110,13 @@ tb_test -n "Partial import" -r 00 -v $int0
 tb_test -i lb_import_config -e "$configfile"
 
 # adding bad parameters
-cat >> "$configfile" <<EOF
-this is non sense
-EOF
+echo "this is non sense" >> "$configfile"
 
-# read config
+
+#
+#  Read config
+#
+
 res=0
 tb_test -i lb_read_config "$configfile" || res=$?
 
@@ -117,6 +128,11 @@ fi
 # read section
 tb_test -i lb_read_config -s global "$configfile"
 tb_test -n "Last line of global section" -r "str3 = 'hello world '" -v ${lb_read_config[${#lb_read_config[@]}-1]}
+
+
+#
+#  Import config (2)
+#
 
 # test import with errors
 tb_test -c 3 lb_import_config -e "$configfile"
@@ -148,15 +164,33 @@ tb_test -n "imported str1" -r hi -v "$str1"
 tb_test -n "imported str2" -r "hello world" -v "$str2"
 tb_test -n "imported str3" -r "hello world " -v "$str3"
 
+
+#
+#  Get config
+#
+
 # get config errors
 tb_test -c 1 lb_get_config
 tb_test -c 1 lb_get_config badConfigFile
 tb_test -c 1 lb_get_config "$configfile" bad/parameter
 
-# get config
-tb_test -r hi lb_get_config "$configfile" str1
-tb_test -r "hello world" lb_get_config "$configfile" str2
-tb_test -r "hello world " lb_get_config "$configfile" str3
+# get config: testing from a file and from stdin
+test_lb_get_config() {
+	# test from file
+	tb_test -r "$2" lb_get_config "$configfile" "$1"
+	# test from stdin
+	local test=$(cat "$configfile" | lb_get_config - "$1")
+	tb_test -n "lb_get_config $1 from stdin" -r "$2" -v "$test"
+}
+
+test_lb_get_config str1 hi
+test_lb_get_config str2 "hello world"
+test_lb_get_config str3 "hello world "
+
+
+#
+#  Set config
+#
 
 # set values
 tb_test -c 1 lb_set_config
@@ -177,7 +211,11 @@ tb_test -r 'with spaces' lb_get_config -s global "$configfile" str4
 tb_test lb_set_config -s part2 "$configfile" int1 102
 tb_test -r 102 lb_get_config -s part2 "$configfile" int1
 
-# test migrate config
+
+#
+#  Migrate config
+#
+
 cat > "$configfile".new <<EOF
 [part1]
 int1 =
