@@ -68,7 +68,7 @@ tb_testfile=./testfile.txt
 
 if echo 123 > "$tb_testfile" ; then
 	tb_test lb_edit 's/2/4/' "$tb_testfile"
-	tb_test -r 143 cat "$tb_testfile"
+	tb_test -r 143 -f "$tb_testfile"
 else
 	tb_test false
 fi
