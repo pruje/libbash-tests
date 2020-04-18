@@ -35,7 +35,7 @@ int0 = 00
 
 [part1]
 int1=11
-#default1 =
+#default1 = default
 ;default2 =
 
 [part2]
@@ -208,6 +208,10 @@ tb_test lb_set_config -s global "$configfile" int1 101
 tb_test -r 101 lb_get_config -s global "$configfile" int1
 tb_test lb_set_config -s global "$configfile" str4 'with spaces'
 tb_test -r 'with spaces' lb_get_config -s global "$configfile" str4
+tb_test lb_set_config -s part1 "$configfile" default1 new
+tb_test -r new lb_get_config -s part1 "$configfile" default1
+tb_test lb_set_config -s part1 "$configfile" default2 new
+tb_test -r new lb_get_config -s part1 "$configfile" default2
 tb_test lb_set_config -s part2 "$configfile" int1 102
 tb_test -r 102 lb_get_config -s part2 "$configfile" int1
 
