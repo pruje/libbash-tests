@@ -5,6 +5,10 @@ tb_test lb_current_os
 tb_test lb_detect_os
 
 
+# detect uid
+tb_test lb_current_uid
+
+
 # test if a user exists
 tb_test lb_user_exists $lb_current_user
 tb_test -c 1 lb_user_exists
