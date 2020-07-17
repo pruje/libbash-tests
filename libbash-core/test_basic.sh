@@ -26,6 +26,11 @@ tb_test lb_test_arguments -ge 2 Hello world
 tb_test lb_test_arguments -gt 1 Hello world
 
 
+# command to array
+tb_test -c 1 lb_cmd_to_array
+tb_test lb_cmd_to_array ls -l
+
+
 # get arguments
 getargs() {
 	lb_getargs "$@" || return 1
