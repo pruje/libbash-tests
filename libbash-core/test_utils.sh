@@ -15,6 +15,9 @@ tb_test -c 1 lb_user_exists
 tb_test -c 1 lb_user_exists badUserName
 tb_test -c 1 lb_user_exists $lb_current_user badUserName
 
+# test if root
+[ $(id -u) = 0 ]
+tb_test -c $? lb_ami_root
 
 # test if a user is in a group
 tb_test -c 1 lb_in_group
