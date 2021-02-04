@@ -16,16 +16,6 @@ tb_test -c 3 lb_function_exists echo
 tb_test -c 3 lb_function_exists lb_command_exists echo
 
 
-# test arguments
-tb_test -c 1 lb_test_arguments falseOperator
-tb_test -c 2 lb_test_arguments -eq 0 Hello world
-tb_test lb_test_arguments -eq 2 Hello world
-tb_test lb_test_arguments -le 2 Hello world
-tb_test lb_test_arguments -lt 3 Hello world
-tb_test lb_test_arguments -ge 2 Hello world
-tb_test lb_test_arguments -gt 1 Hello world
-
-
 # command to array
 tb_test -c 1 lb_cmd_to_array
 tb_test lb_cmd_to_array ls -l
