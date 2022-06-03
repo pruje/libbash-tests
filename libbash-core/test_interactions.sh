@@ -91,6 +91,7 @@ tb_test -i lb_choose_option -m a b c << EOF
 EOF
 tb_test -r "1 3" -v "${lb_choose_option[@]}"
 
+tb_test lb_say "Hello. This is a speech test."
 
 # avoid skipping tests if last failed
 true
